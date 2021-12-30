@@ -1,18 +1,26 @@
 package view;
 
+import beans.User;
+
 import java.util.Objects;
 import javax.swing.*;
 
 public class MenuFrame{
     JFrame frame = new JFrame();
-    MenuFrame(){
+
+    User user = null;
+    MenuFrame(User user){
         frame.setTitle("指针信息在线测评");
         frame.setSize(800,600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        this.setUser(user);
         frame.add(this.getMenuJPanel());
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     private JPanel getMenuJPanel(){
@@ -24,7 +32,7 @@ public class MenuFrame{
         title.setBounds(120,20,800,100);
         panel.add(title);
 
-        JLabel textField = new JLabel("张三同学你好");
+        JLabel textField = new JLabel(user.getName() + "同学你好");
         textField.setBounds(360,10,680,260);
         panel.add(textField);
 

@@ -1,5 +1,6 @@
 package view;
 
+import beans.User;
 import controller.UserController;
 
 import javax.swing.*;
@@ -57,7 +58,7 @@ public class LoginFrame {
                 String password = new String(passwordText.getPassword()).trim();
                 UserController userController = new UserController();
                 if(userController.login(username,password)){
-                    MenuFrame menuFrame = new MenuFrame();
+                    MenuFrame menuFrame = new MenuFrame(userController.getUserById(username));
                     menuFrame.show();
                     close();
                 }else{

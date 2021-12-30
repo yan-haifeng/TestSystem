@@ -13,4 +13,8 @@ public class UserService {
         }
         return false;
     }
+
+    public User getUserById(String username){
+        return userDao.getUserById(username);
+    }
 }
