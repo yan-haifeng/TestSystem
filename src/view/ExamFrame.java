@@ -1,22 +1,30 @@
 package view;
 
+import beans.User;
+import memory.DataMemory;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
 public class ExamFrame {
-    public static JFrame getExam(){
-        JFrame frame = new JFrame();
+    JFrame frame = new JFrame();
+    User user;
+    public ExamFrame(){
+        init();
+    }
+
+    private void init(){
         frame.setTitle("指针信息在线测评");
         frame.setSize(800,600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(ExamFrame.getExamPanel());
+        user = DataMemory.getDataMemory().getLoginUser();
+        frame.add(this.getExamPanel());
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        return frame;
     }
 
-    private static JPanel getExamPanel(){
+    private JPanel getExamPanel(){
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
@@ -28,31 +36,38 @@ public class ExamFrame {
         panel.add(title);
 
         JLabel nameLabel = new JLabel("姓名：");
-        nameLabel.setBounds(100,90,100,25);
+        nameLabel.setBounds(50,90,100,25);
         panel.add(nameLabel);
-        JLabel name = new JLabel("张三");
-        name.setBounds(140,90,100,25);
+        JLabel name = new JLabel(user.getName());
+        name.setBounds(90,90,100,25);
         panel.add(name);
 
+        JLabel idLabel = new JLabel("编号：");
+        idLabel.setBounds(140,90,100,25);
+        panel.add(idLabel);
+        JLabel id = new JLabel(user.getId());
+        id.setBounds(180,90,100,25);
+        panel.add(id);
+
         JLabel examtimeLabel = new JLabel("考试时间：");
-        examtimeLabel.setBounds(200,90,100,25);
+        examtimeLabel.setBounds(320,90,100,25);
         panel.add(examtimeLabel);
         JLabel examtime = new JLabel("10分钟");
-        examtime.setBounds(260,90,100,25);
+        examtime.setBounds(380,90,100,25);
         panel.add(examtime);
 
         JLabel examtypeLabel = new JLabel("考试类别：");
-        examtypeLabel.setBounds(340,90,100,25);
+        examtypeLabel.setBounds(440,90,100,25);
         panel.add(examtypeLabel);
         JLabel type = new JLabel("JavaSE阶段测试（一）");
-        type.setBounds(400,90,150,25);
+        type.setBounds(500,90,150,25);
         panel.add(type);
 
         JLabel examcountLabel = new JLabel("题目数量：");
-        examcountLabel.setBounds(560,90,100,25);
+        examcountLabel.setBounds(650,90,100,25);
         panel.add(examcountLabel);
         JLabel count = new JLabel("10");
-        count.setBounds(620,90,150,25);
+        count.setBounds(710,90,150,25);
         panel.add(count);
 
         TextField textField = new TextField();
@@ -96,5 +111,12 @@ public class ExamFrame {
         rightdown.setBounds(630,520,150,25);
         panel.add(rightdown);
         return panel;
+    }
+    public void show(){
+        this.frame.setVisible(true);
+    }
+
+    public void close(){
+        this.frame.setVisible(false);
     }
 }

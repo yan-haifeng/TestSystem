@@ -6,7 +6,6 @@ import util.Config;
 import java.io.*;
 
 public class UserDao {
-    Config propertiesConfig = new Config("/config.properties");
     final String API = UserDao.class.getResource("/").getPath().substring(1);
     String url = (API + new Config("/config.properties").getString("UserFile")).replace("/","\\");
 
@@ -43,7 +42,9 @@ public class UserDao {
             e.printStackTrace();
         }finally {
             try {
+                assert fileReader != null;
                 fileReader.close();
+                assert bufferedReader != null;
                 bufferedReader.close();
             } catch (Exception e) {
                 e.printStackTrace();

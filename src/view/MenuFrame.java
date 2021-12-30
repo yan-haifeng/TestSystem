@@ -1,26 +1,28 @@
 package view;
 
 import beans.User;
+import memory.DataMemory;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Objects;
 import javax.swing.*;
 
 public class MenuFrame{
     JFrame frame = new JFrame();
+    User user;
+    MenuFrame(){
+        init();
+    }
 
-    User user = null;
-    MenuFrame(User user){
+    private void init(){
         frame.setTitle("指针信息在线测评");
         frame.setSize(800,600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setUser(user);
+        this.user = DataMemory.getDataMemory().getLoginUser();
         frame.add(this.getMenuJPanel());
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     private JPanel getMenuJPanel(){
@@ -76,6 +78,16 @@ public class MenuFrame{
         JLabel rightdown = new JLabel("指针信息--版权所有 盗版必究");
         rightdown.setBounds(600,520,180,25);
         panel.add(rightdown);
+
+        //添加事件
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ExamFrame examFrame = new ExamFrame();
+                examFrame.show();
+                close();
+            }
+        });
 
         return panel;
     }

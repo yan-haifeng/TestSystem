@@ -2,6 +2,7 @@ package view;
 
 import beans.User;
 import controller.UserController;
+import memory.DataMemory;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,10 @@ import java.awt.event.ActionListener;
 public class LoginFrame {
     private JFrame frame = new JFrame("登录系统");
     public LoginFrame(){
+        this.init();
+    }
+
+    private void init(){
         frame.setSize(400, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this.getLoginPanel());
@@ -58,7 +63,9 @@ public class LoginFrame {
                 String password = new String(passwordText.getPassword()).trim();
                 UserController userController = new UserController();
                 if(userController.login(username,password)){
-                    MenuFrame menuFrame = new MenuFrame(userController.getUserById(username));
+                    //将登录用户存入内存
+                    DataMemory.getDataMemory().setLoginUser(userController.getUserById(username));
+                    MenuFrame menuFrame = new MenuFrame();
                     menuFrame.show();
                     close();
                 }else{

@@ -7,6 +7,10 @@ import java.util.Objects;
 public class Welcome {
     JFrame frame = new JFrame("欢迎进入指针信息在线评系统");
     public Welcome(){
+        this.init();
+    }
+
+    private void init(){
         frame.setSize(430,300);
         JPanel panel= new JPanel(){
             @Override
