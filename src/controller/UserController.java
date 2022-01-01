@@ -1,10 +1,10 @@
 package controller;
 
 import beans.User;
-import service.UserService;
+import service.impl.UserServiceImpl;
 
 public class UserController {
-    private UserService userService = new UserService();
+    private UserServiceImpl userService = new UserServiceImpl();
 
     public boolean login(String username,String password){
         return userService.login(username,password);

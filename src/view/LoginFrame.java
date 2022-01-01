@@ -71,7 +71,6 @@ public class LoginFrame {
                 }else{
                     //登录失败
                     JOptionPane.showMessageDialog(frame,"用户名或密码错误！");
-                    System.out.println("密码错误");
                 }
             }
         });
@@ -80,6 +79,13 @@ public class LoginFrame {
         JButton cancelButton = new JButton("cancel");
         cancelButton.setBounds(200, 150, 100, 40);
         panel.add(cancelButton);
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
         return panel;
     }

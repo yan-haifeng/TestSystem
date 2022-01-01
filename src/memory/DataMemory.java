@@ -2,15 +2,23 @@ package memory;
 
 import beans.Question;
 import beans.User;
+import dao.QuestionDao;
+import util.Config;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+/**
+ * 全局数据文件
+ * 数据唯一，单例
+ */
 public class DataMemory {
+    final String API = QuestionDao.class.getResource("/").getPath().substring(1);
+    String questionUrl = (API + new Config("/config.properties").getString("QuestionFile")).replace("/","\\");
     private ArrayList<Question> questionsMemory;
     private User loginUser;
-    static DataMemory dataMemory;
+    private static final DataMemory dataMemory;
     static {
         dataMemory = new DataMemory();
     }
@@ -20,7 +28,6 @@ public class DataMemory {
 
     private void init(){
         this.questionsMemory  = new ArrayList<>();
-        //
         this.LoadQuestion();
     }
 
@@ -41,14 +48,13 @@ public class DataMemory {
     }
 
     private void LoadQuestion(){
-        ArrayList<Question> questionList = DataMemory.getDataMemory().getQuestionsMemory();
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
         String line = null;
         Question question = null;
         int flag = 1; //1.参数 2.题目 3.选项A 4.选项B 5.选型C 6.选项D
         try {
-            fileReader = new FileReader(url);
+            fileReader = new FileReader(questionUrl);
             bufferedReader = new BufferedReader(fileReader);
 
             while(true){
@@ -100,7 +106,7 @@ public class DataMemory {
                 //解析D选项
                 if(flag == 6){
                     question.setOptionD(line);
-                    questionList.add(question);
+                    this.questionsMemory.add(question);
                     flag = 1;
                 }
             }
@@ -116,4 +122,6 @@ public class DataMemory {
             }
         }
     }
+
+
 }

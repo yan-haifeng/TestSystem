@@ -89,6 +89,15 @@ public class MenuFrame{
             }
         });
 
+        jButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginFrame loginFrame = new LoginFrame();
+                loginFrame.show();
+                close();
+            }
+        });
+
         return panel;
     }
 

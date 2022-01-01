@@ -9,11 +9,12 @@ public class Question {
     private String optionD;
     private String score;
     private String level;
+    private int id;
 
     public Question() {
     }
 
-    public Question(String title, String answer, String optionA, String optionB, String optionC, String optionD, String score, String level) {
+    public Question(String title, String answer, String optionA, String optionB, String optionC, String optionD, String score, String level, int id) {
         this.title = title;
         this.answer = answer;
         this.optionA = optionA;
@@ -22,6 +23,7 @@ public class Question {
         this.optionD = optionD;
         this.score = score;
         this.level = level;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -88,6 +90,14 @@ public class Question {
         this.level = level;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
@@ -99,6 +109,7 @@ public class Question {
                 ", optionD='" + optionD + '\'' +
                 ", score='" + score + '\'' +
                 ", level='" + level + '\'' +
+                ", id=" + id +
                 '}';
     }
 }
